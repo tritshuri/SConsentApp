@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ConsentApp</string>
+    <string name="consent_education">
+    Consent is a voluntary, enthusiastic, and clear agreement between participants to engage in specific sexual activity.\n\n
+    Key Principles:\n
+    - Must be given freely without pressure\n
+    - Can be withdrawn at any time\n
+    - Requires ongoing communication\n
+    - Never assumed or implied\n\n
+    Remember: Only YES means YES!
+    </string>
+    <string name="consent_question">Do you consent to engage in this activity?</string>
+</resources>

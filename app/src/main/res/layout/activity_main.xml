@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConsent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Consent"
+        app:cornerRadius="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View History"
+        app:cornerRadius="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLearn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Learn About Consent"
+        app:cornerRadius="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        app:cornerRadius="8dp"
+        android:layout_marginTop="32dp"/>
+
+</LinearLayout>

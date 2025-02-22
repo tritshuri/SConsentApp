@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1034587868832",
+    "project_id": "sconsentapp",
+    "storage_bucket": "sconsentapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034587868832:android:d4b125dee86594e83943c5",
+        "android_client_info": {
+          "package_name": "com.ritshurikt.consentapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUwriuxq9UD3hBaG4mDA62Z6cHUs2dplU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
