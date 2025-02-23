@@ -1,12 +1,14 @@
 package com.ritshurikt.consentapp.viewmodel;
 
 import android.app.Application;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.ritshurikt.consentapp.database.AppDatabase;
 import com.ritshurikt.consentapp.database.ConsentDao;
-import com.ritshurikt.consentapp.database.ConsentRecord;
+import com.ritshurikt.consentapp.database.ConsentRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -17,28 +19,42 @@ public class ConsentViewModel extends AndroidViewModel {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    public ConsentViewModel(Application application) {
+    public ConsentViewModel(@NonNull Application application) {
         super(application);
-        consentDao = AppDatabase.getInstance(application).consentDao();
+        AppDatabase database = AppDatabase.getInstance(application);
+        consentDao = database.consentDao();
     }
 
-    public void insertConsent(String status) {
+    public void sendConsentRequest(ConsentRequest request) {
+        executor.execute(() -> consentDao.insert(request));
+    }
+
+    public void respondToRequest(ConsentRequest request, boolean accepted) {
         executor.execute(() -> {
-            if (auth.getCurrentUser() != null) {
-                ConsentRecord record = new ConsentRecord(
-                        status,
-                        new Date(),
-                        auth.getCurrentUser().getUid()
-                );
-                consentDao.insert(record);
-            }
+            request.setStatus(accepted ? "ACCEPTED" : "DENIED");
+            consentDao.update(request);
         });
     }
 
-    public LiveData<List<ConsentRecord>> getConsentHistory() {
-        String userId = auth.getCurrentUser() != null ?
-                auth.getCurrentUser().getUid() : "";
-        return consentDao.getRecordsByUser(userId);
+    public LiveData<List<ConsentRequest>> getPendingRequests() {
+        FirebaseUser user = auth.getCurrentUser();
+        return user != null ?
+                consentDao.getPendingRequests(user.getEmail()) :
+                null;
+    }
+
+    public LiveData<List<ConsentRequest>> getSentRequests() {
+        FirebaseUser user = auth.getCurrentUser();
+        return user != null ?
+                consentDao.getSentRequests(user.getUid()) :
+                null;
+    }
+
+    public LiveData<List<ConsentRequest>> getAllUserRequests() {
+        FirebaseUser user = auth.getCurrentUser();
+        return user != null ?
+                consentDao.getAllUserRequests(user.getUid(), user.getEmail()) :
+                null;
     }
 
     @Override

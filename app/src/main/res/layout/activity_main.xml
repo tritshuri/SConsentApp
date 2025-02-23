@@ -8,10 +8,18 @@
     android:background="@color/background">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnConsent"
+        android:id="@+id/btnSendConsent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Consent"
+        android:text="New Consent Request"
+        app:cornerRadius="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPendingRequests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pending Requests"
         app:cornerRadius="8dp"
         android:layout_marginBottom="16dp"/>
 
@@ -19,15 +27,7 @@
         android:id="@+id/btnHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View History"
-        app:cornerRadius="8dp"
-        android:layout_marginBottom="16dp"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLearn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Learn About Consent"
+        android:text="Consent History"
         app:cornerRadius="8dp"
         android:layout_marginBottom="16dp"/>
 

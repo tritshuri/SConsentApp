@@ -39,6 +39,8 @@
             android:exported="false" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.SendConsentActivity" />
+        <activity android:name=".activities.PendingRequestsActivity" />
     </application>
 
 </manifest>

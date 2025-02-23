@@ -4,13 +4,23 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 import java.util.List;
 
 @Dao
 public interface ConsentDao {
     @Insert
-    void insert(ConsentRecord record);
+    void insert(ConsentRequest request);
 
-    @Query("SELECT * FROM consent_history WHERE userId = :userId ORDER BY timestamp DESC")
-    LiveData<List<ConsentRecord>> getRecordsByUser(String userId);
+    @Update
+    void update(ConsentRequest request);
+
+    @Query("SELECT * FROM consent_requests WHERE receiverEmail = :email AND status = 'PENDING'")
+    LiveData<List<ConsentRequest>> getPendingRequests(String email);
+
+    @Query("SELECT * FROM consent_requests WHERE senderId = :userId ORDER BY timestamp DESC")
+    LiveData<List<ConsentRequest>> getSentRequests(String userId);
+
+    @Query("SELECT * FROM consent_requests WHERE senderId = :userId OR receiverEmail = :email ORDER BY timestamp DESC")
+    LiveData<List<ConsentRequest>> getAllUserRequests(String userId, String email);
 }

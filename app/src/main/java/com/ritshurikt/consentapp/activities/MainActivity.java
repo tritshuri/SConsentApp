@@ -16,16 +16,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         auth = FirebaseAuth.getInstance();
 
-        MaterialButton btnConsent = findViewById(R.id.btnConsent);
+
         MaterialButton btnHistory = findViewById(R.id.btnHistory);
         MaterialButton btnLogout = findViewById(R.id.btnLogout);
-        MaterialButton btnLearn = findViewById(R.id.btnLearn);
+        MaterialButton btnSendConsent = findViewById(R.id.btnSendConsent);
+        MaterialButton btnPendingRequests = findViewById(R.id.btnPendingRequests);
 
-        btnLearn.setOnClickListener(v ->
-                startActivity(new Intent(this, LearnActivity.class)));
+        btnSendConsent.setOnClickListener(v ->
+                startActivity(new Intent(this, SendConsentActivity.class)));
 
-        btnConsent.setOnClickListener(v ->
-                startActivity(new Intent(this, ConsentActivity.class)));
+        btnPendingRequests.setOnClickListener(v ->
+                startActivity(new Intent(this, PendingRequestsActivity.class)));
 
         btnHistory.setOnClickListener(v ->
                 startActivity(new Intent(this, HistoryActivity.class)));

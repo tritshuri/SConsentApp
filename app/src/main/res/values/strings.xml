@@ -10,4 +10,7 @@
     Remember: Only YES means YES!
     </string>
     <string name="consent_question">Do you consent to engage in this activity?</string>
+    <string name="status_pending">Pending</string>
+    <string name="status_accepted">Accepted</string>
+    <string name="status_denied">Denied</string>
 </resources>
