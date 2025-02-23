@@ -4,7 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Consent Request"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -15,7 +24,7 @@
             android:id="@+id/etReceiverEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Recipient's Email"
+            android:hint="Recipient Email"
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -23,14 +32,7 @@
         android:id="@+id/btnSendRequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send Consent Request"
+        android:text="Send Request"
         app:cornerRadius="8dp"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone"/>
 
 </LinearLayout>

@@ -8,13 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.button.MaterialButton;
 import com.ritshurikt.consentapp.R;
 import com.ritshurikt.consentapp.database.ConsentRequest;
 import java.text.SimpleDateFormat;
 
-public class HistoryAdapter extends ListAdapter<ConsentRequest, HistoryAdapter.ViewHolder> {
+public class PendingRequestsAdapter extends ListAdapter<ConsentRequest, PendingRequestsAdapter.ViewHolder> {
+    private OnResponseListener responseListener;
 
-    public HistoryAdapter() {
+    public interface OnResponseListener {
+        void onResponse(ConsentRequest request, boolean accepted);
+    }
+
+    public PendingRequestsAdapter() {
         super(DIFF_CALLBACK);
     }
 
@@ -37,31 +43,44 @@ public class HistoryAdapter extends ListAdapter<ConsentRequest, HistoryAdapter.V
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_request_history, parent, false);
+                .inflate(R.layout.item_pending_request, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ConsentRequest request = getItem(position);
-        holder.tvDetails.setText(formatRequestDetails(request));
-        holder.tvStatus.setText(request.getStatus());
-        holder.tvDate.setText(new SimpleDateFormat("dd MMM yyyy HH:mm")
+        holder.tvSenderEmail.setText(request.getSenderEmail());
+        holder.tvTimestamp.setText(new SimpleDateFormat("dd MMM yyyy HH:mm")
                 .format(request.getTimestamp()));
+
+        holder.btnAccept.setOnClickListener(v -> {
+            if (responseListener != null) {
+                responseListener.onResponse(request, true);
+            }
+        });
+
+        holder.btnDeny.setOnClickListener(v -> {
+            if (responseListener != null) {
+                responseListener.onResponse(request, false);
+            }
+        });
     }
 
-    private String formatRequestDetails(ConsentRequest request) {
-        return "From: " + request.getSenderEmail() + "\nTo: " + request.getReceiverEmail();
+    public void setOnResponseListener(OnResponseListener listener) {
+        this.responseListener = listener;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvDetails, tvStatus, tvDate;
+        TextView tvSenderEmail, tvTimestamp;
+        MaterialButton btnAccept, btnDeny;
 
         ViewHolder(View itemView) {
             super(itemView);
-            tvDetails = itemView.findViewById(R.id.tvDetails);
-            tvStatus = itemView.findViewById(R.id.tvStatus);
-            tvDate = itemView.findViewById(R.id.tvDate);
+            tvSenderEmail = itemView.findViewById(R.id.tvSenderEmail);
+            tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
+            btnAccept = itemView.findViewById(R.id.btnAccept);
+            btnDeny = itemView.findViewById(R.id.btnDeny);
         }
     }
 }
